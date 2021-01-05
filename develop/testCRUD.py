@@ -15,9 +15,9 @@ cursor = conexao.cursor()
 
 
 #CREATE
-'''sql = "INSERT INTO tbPessoas VALUES('Otavio', 'Rodrigues', '2000-03-24', 'M', 1.80, 105.00, 'Estagiário TI', 'Brasil', 'Brasil', 'Lasanha', 'POP', 'Fantasia', 'FPS')"
+sql = "INSERT INTO tbPessoas VALUES('Otavio', 'Rodrigues', '2000-03-24', 'M', 1.80, 105.00, 'Estagiário TI', 'Brasil', 'Brasil', 'Lasanha', 'POP', 'Fantasia', 'FPS')"
 cursor.execute(sql)
-conexao.commit()'''
+conexao.commit()
 
 #READ
 sql = "SELECT * FROM tbPessoas"
