@@ -15,13 +15,18 @@ cnx = cnx_sql()
 cursor = cnx.cursor()
 
 def create(id, nome, sobrenome, nasc, sexo, alt, peso, prof, nacionalidade, paisRes, estMusical, estLivro, estGame):
-    sql = "INSERT INTO tbPessoas VALUES('"+ id +"', '"+ nome +"', '"+ sobrenome +"', '"+ nasc +"', '"+ sexo +"', '"+ alt +"', '"+ peso +"', '"+ prof + "', '"+ nacionalidade +"', '"+ paisRes +"', '"+ estMusical +"', '"+ estLivro +"', '"+ estGame +"');"
+    sql = "INSERT INTO tbPessoas VALUES('"+ nome +"', '"+ sobrenome +"', '"+ nasc +"', '"+ sexo +"', '"+ alt +"', '"+ peso +"', '"+ prof + "', '"+ nacionalidade +"', '"+ paisRes +"', '"+ estMusical +"', '"+ estLivro +"', '"+ estGame +"', '"+ id +"');"
     cursor.execute(sql)
     cnx.commit()
 
 def read(item, val):
     sql = "SELECT * FROM tbPessoas WHERE "+ item +" = "+ val + ";"
     cursor.execute(sql)
+
+    linhas = cursor.fetchall()#aqui ele exibirá todas as linhas do DB, o fetchone() exibe somente a primeira
+
+    for linha in linhas:
+        print(linha)
 
 def update(id, item, alt):
     sql = "UPDATE tbPessoas SET " + item + " = '" + alt + "' WHERE id = '" + id + "';"
