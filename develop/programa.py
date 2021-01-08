@@ -39,6 +39,7 @@ while True:
             print('Parâmetros:\n1 - ID\n2 - nome\n3 - País de Residência')
             escolhaVerCadastro = int(input("Escolha o parâmetro para realizar a busca: "))
             valorVerCadastro = str(input("Digite o valor da busca: "))
+
             if escolhaVerCadastro == 1:
                 cnx_db.read('id', valorVerCadastro)
                 continuar = str(input('Deseja fazer uma nova busca? [S/N]')).upper()
@@ -57,8 +58,13 @@ while True:
             else:
                 print(f"ERRO! {escolhaVerCadastro} não é um parâmetro válido!")
 
+
+
     #Atualizar cadastros
     elif escolha == 3:
+        cnx_db.validarUpdate()
+        '''
+        #tentativa anterior ao tratamento de erros
         while True:
             interface.titulo('Atualizar cadastro')
             idAlterar = str(input('Informe o ID do cadastro que deseja alterar: '))
@@ -74,10 +80,13 @@ while True:
                     break
             continuarNovo = str(input(f'Deseja alterar outro cadastro? [S/N]: ')).upper()
             if continuarNovo == 'N':
-                break
+                break'''
 
     #excluir cadastros
     elif escolha == 4:
+        cnx_db.validarDelete()
+        '''
+        #Tentativa anterior ao tratamento de erros
         while True:
             interface.titulo('Escluir cadastro')
             escolhaId = str(input('Informe o ID do cadastro que deseja excluir: '))
@@ -89,7 +98,7 @@ while True:
                 break
             excluirMais = str(input('Deseja exluir mais algum registro? [S/N]: ')).upper()
             if excluirMais == 'N':
-                break
+                break'''
 
     elif escolha == 5:
         interface.titulo('Saindo do sistema... Até logo!')

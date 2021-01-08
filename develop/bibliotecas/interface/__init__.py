@@ -1,9 +1,9 @@
 from textwrap import wrap
 
-def sep(tam = 50):
+def sep(tam = 60):
     print('-' * tam)
 
-def titulo(texto, tam = 50):
+def titulo(texto, tam = 60):
     """
     -> Cria a formatação automática para os títulos
     :param texto: texto para o título
@@ -14,7 +14,7 @@ def titulo(texto, tam = 50):
     print(f'{texto.center(tam)}')
     sep()
 
-def texto(texto, tam = 50):
+def texto(texto, tam = 60):
     """
     -> Cria um texto com quebra de linha automática
     :param texto: texto a ser quebrado
