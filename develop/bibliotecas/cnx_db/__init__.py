@@ -64,7 +64,7 @@ def validarUpdate():
     :return: retorna o valor atualizado no DB
     """
     while True:
-        interface.titulo('Atualizar cadastro')
+        interface.titulo('Atualizar cadastro', cor=3)
         idAlterar = str(input('Informe o ID do cadastro que deseja alterar: '))
         while True:
             sql = f"SELECT * FROM tbCadastros WHERE id= '{idAlterar}'"
@@ -82,6 +82,8 @@ def validarUpdate():
                 escolhaAlt = int(input('Escolha a opção acima pelo seu número: '))
                 if escolhaAlt == 7:
                     break
+                elif escolhaAlt > 7:
+                    interface.erro(f'ERRO! Opção:{escolhaAlt} inválido, tente tente novamente.')
                 else:
                     alteracao = str(input('Informe a alteração: '))
                     itemAlterar = {1: 'profissao', 2: 'paisresidencia', 3: 'comidaFavorita', 4: 'estiloMusicalFavorito',
@@ -106,29 +108,32 @@ def validarDelete():
     :return: remove o registro do DB
     """
     while True:
-        interface.titulo('Escluir cadastro')
-        escolhaId = str(input('Informe o ID do cadastro que deseja excluir: '))
+        try:
+            interface.titulo('Escluir cadastro',cor=1)
+            escolhaId = str(input('Informe o ID do cadastro que deseja excluir: '))
 
-        sql = f"SELECT * FROM tbCadastros WHERE id= '{escolhaId}'"
-        cursor.execute(sql)
-        linhas = cursor.fetchall()
+            sql = f"SELECT * FROM tbCadastros WHERE id= '{escolhaId}'"
+            cursor.execute(sql)
+            linhas = cursor.fetchall()
 
-        if len(linhas) == 0:
-            interface.erro(f'ERRO! ID:{escolhaId} inexistente, tente outro.')
+            if len(linhas) == 0:
+                interface.erro(f'ERRO! ID:{escolhaId} inexistente, tente outro.')
 
-        else:
-            while True:
-                read('id', escolhaId)
-                decisao = str(input('Tem certeza que deseja excluir esse cadastro? [S/N]: ')).upper()
-                if decisao == 'S':
-                    delete(escolhaId)
-                    print(f'ID: {escolhaId} removido com sucesso!')
-                    break
-                else:
-                    break
-        excluirMais = str(input('Deseja excluir mais algum registro? [S/N]: ')).upper()
-        if excluirMais == 'N':
-            break
+            else:
+                while True:
+                    read('id', escolhaId)
+                    decisao = str(input('Tem certeza que deseja excluir esse cadastro? [S/N]: ')).upper()
+                    if decisao == 'S':
+                        delete(escolhaId)
+                        interface.sucesso(f'ID: {escolhaId} removido com sucesso!')
+                        break
+                    else:
+                        break
+            excluirMais = str(input('Deseja excluir mais algum registro? [S/N]: ')).upper()
+            if excluirMais == 'N':
+                break
+        except:
+            interface.erro(f'ERRO! {escolhaId} não é um ID, tente novamente.')
 
 def delete(id):
     sql = f"DELETE FROM tbCadastros WHERE id = '{id}';"
